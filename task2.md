@@ -148,7 +148,7 @@ resource "azurerm_availability_set" "app_set" {
 }
 
 resource "azurerm_network_security_group" "vm_nsg" {
-  name                = "example-nsg"
+  name                = "vm-nsg"
   location            = azurerm_resource_group.DevTerraform.location
   resource_group_name = azurerm_resource_group.DevTerraform.name
 
