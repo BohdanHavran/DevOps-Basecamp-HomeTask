@@ -17,15 +17,6 @@ terraform {
   }
 }
 
-provider "azurerm" {
-  features {}
-
-  subscription_id = "c6898b6c-b722-4f6c-b03b-8b15fce7c2f3"
-  client_id       = "fdb5be81-5d62-4f5e-bb08-47a4b19b7cdc"
-  client_secret   = "6S48Q~zEacUXxaRs11Iil.C_kn~LE-8mEKIwocQ1"
-  tenant_id       = "7631cd62-5187-4e15-8b8e-ef653e366e7a"
-}
-
 variable "userdata_file" {
   type = string
 
