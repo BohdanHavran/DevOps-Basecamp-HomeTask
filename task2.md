@@ -1,3 +1,258 @@
+# Loadbalancer
+- This task was performed in two ways. The first way is with Terraform. The second way is through the Azure UI.
+
+# Terraform
+http://104.45.18.212/
+
+![image](https://user-images.githubusercontent.com/7732624/206893349-e5ca532b-b8d1-481c-bf18-17f243d4c9ae.png)
+![image](https://user-images.githubusercontent.com/7732624/206893333-f947075b-f463-4379-af67-8afc4116d96d.png)
+
+```tf
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+
+  subscription_id = "c6898b6c-b722-4f6c-b03b-8b15fce7c2f3"
+  client_id       = "fdb5be81-5d62-4f5e-bb08-47a4b19b7cdc"
+  client_secret   = "6S48Q~zEacUXxaRs11Iil.C_kn~LE-8mEKIwocQ1"
+  tenant_id       = "7631cd62-5187-4e15-8b8e-ef653e366e7a"
+}
+
+variable "userdata_file" {
+  type = string
+
+  default = "user_data.sh"
+}
+
+resource "azurerm_resource_group" "DevTerraform" {
+  name     = "DevTerraform"
+  location = "West Europe"
+}
+
+resource "azurerm_virtual_network" "VM_network" {
+  name                = "VM_network"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.DevTerraform.location
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+}
+
+
+resource "azurerm_subnet" "SubnetA" {
+  name                 = "SubnetA"
+  resource_group_name  = azurerm_resource_group.DevTerraform.name
+  virtual_network_name = azurerm_virtual_network.VM_network.name
+  address_prefixes     = ["10.0.2.0/24"]
+}
+
+resource "azurerm_network_interface" "VM1-interface" {
+  name                = "VM1-interface"
+  location            = azurerm_resource_group.DevTerraform.location
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.SubnetA.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_network_interface" "VM2-interface" {
+  name                = "VM2-interface"
+  location            = azurerm_resource_group.DevTerraform.location
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.SubnetA.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_linux_virtual_machine" "VM1-TR" {
+  name                = "VM1-TR"
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+  location            = azurerm_resource_group.DevTerraform.location
+  size                = "Standard_B1s"
+  admin_username      = "VM1"
+  user_data           = filebase64(var.userdata_file)
+  availability_set_id = azurerm_availability_set.app_set.id
+  network_interface_ids = [
+    azurerm_network_interface.VM1-interface.id,
+  ]
+
+  admin_ssh_key {
+    username   = "VM1"
+    public_key = file("~/.ssh/id_rsa.pub")
+  }
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
+    version   = "latest"
+  }
+}
+
+resource "azurerm_linux_virtual_machine" "VM2-TR" {
+  name                = "VM2-TR"
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+  location            = azurerm_resource_group.DevTerraform.location
+  size                = "Standard_B1s"
+  admin_username      = "VM2"
+  user_data           = filebase64(var.userdata_file)
+  availability_set_id = azurerm_availability_set.app_set.id
+  network_interface_ids = [
+    azurerm_network_interface.VM2-interface.id,
+  ]
+
+  admin_ssh_key {
+    username   = "VM2"
+    public_key = file("~/.ssh/id_rsa.pub")
+  }
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
+    version   = "latest"
+  }
+}
+
+resource "azurerm_availability_set" "app_set" {
+  name                         = "app-set"
+  location                     = azurerm_resource_group.DevTerraform.location
+  resource_group_name          = azurerm_resource_group.DevTerraform.name
+  platform_fault_domain_count  = 3
+  platform_update_domain_count = 3
+  depends_on = [
+    azurerm_resource_group.DevTerraform
+  ]
+}
+
+resource "azurerm_network_security_group" "vm_nsg" {
+  name                = "example-nsg"
+  location            = azurerm_resource_group.DevTerraform.location
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+
+  security_rule {
+    name                       = "Allow_HTTP"
+    priority                   = 200
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "nsg_association" {
+  subnet_id                 = azurerm_subnet.SubnetA.id
+  network_security_group_id = azurerm_network_security_group.vm_nsg.id
+}
+
+
+resource "azurerm_public_ip" "LB_ip" {
+  name                = "LB_ip"
+  location            = azurerm_resource_group.DevTerraform.location
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+  allocation_method   = "Static"
+}
+
+resource "azurerm_lb" "LBTR" {
+  name                = "LBTR"
+  location            = azurerm_resource_group.DevTerraform.location
+  resource_group_name = azurerm_resource_group.DevTerraform.name
+
+  frontend_ip_configuration {
+    name                 = "LB_ip"
+    public_ip_address_id = azurerm_public_ip.LB_ip.id
+  }
+}
+
+resource "azurerm_lb_backend_address_pool" "lb_bp" {
+  loadbalancer_id = azurerm_lb.LBTR.id
+  name            = "BackEndAddressPool"
+  depends_on = [
+    azurerm_lb.LBTR,
+    azurerm_availability_set.app_set
+  ]
+}
+
+resource "azurerm_network_interface_backend_address_pool_association" "bp-association1" {
+  network_interface_id    = azurerm_network_interface.VM1-interface.id
+  ip_configuration_name   = "internal"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.lb_bp.id
+}
+
+resource "azurerm_network_interface_backend_address_pool_association" "bp-association2" {
+  network_interface_id    = azurerm_network_interface.VM2-interface.id
+  ip_configuration_name   = "internal"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.lb_bp.id
+}
+
+resource "azurerm_lb_probe" "LB_prob" {
+  loadbalancer_id     = azurerm_lb.LBTR.id
+  name                = "LB_prob"
+  protocol            = "Http"
+  port                = 80
+  request_path        = "/"
+  interval_in_seconds = 5
+}
+
+resource "azurerm_lb_rule" "LB_Rule" {
+  loadbalancer_id                = azurerm_lb.LBTR.id
+  name                           = "LB_Rule"
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 80
+  frontend_ip_configuration_name = "LB_ip"
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb_bp.id]
+  probe_id                       = azurerm_lb_probe.LB_prob.id
+}
+```
+Addition to the code: user_data.sh
+```sh
+#!/bin/bash
+
+echo "Start script..."
+
+sudo apt -y update
+sudo apt -y install apache2
+sudo chmod -R 777 /var/www/html
+
+echo "<h1>Bohdan Havran $(hostname -i)</h1>" > /var/www/html/index.html
+
+echo "Done"
+```
+
+
+
+# Azure UI
+http://20.74.112.227/
+
+![image](https://user-images.githubusercontent.com/7732624/206893571-d434ab57-1c2a-4b1c-a706-3bef786e484d.png)
+![image](https://user-images.githubusercontent.com/7732624/206893522-bec3bad5-fb1b-4bb4-beec-3f5317b28843.png)
+
 ```json
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
