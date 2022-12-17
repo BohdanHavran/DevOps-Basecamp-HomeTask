@@ -5,7 +5,6 @@ sudo apt -y install mysql-client mysql-server
 sudo apt -y install php
 sudo apt -y install libapache2-mod-php
 sudo apt -y install graphviz aspell ghostscript clamav php-pspell php-curl php-gd php-intl php-mysql php-xml php-xmlrpc php-ldap php-zip php-soap php-mbstring git
-sleep 1m
 sudo service apache2 restart
 cd /opt
 sudo git clone git://git.moodle.org/moodle.git
