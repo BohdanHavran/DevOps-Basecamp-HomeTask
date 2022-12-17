@@ -1,25 +1,9 @@
 provider "aws" {
   region = "us-east-2"
 }
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-*-*-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"]
-}
-
+# EC2 Instances
 resource "aws_instance" "web" {
-  ami                    = data.aws_ami.ubuntu.id
+  ami                    = "ami-0283a57753b18025b"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.Webserver_security.id]
   user_data              = file("user_data.sh")
@@ -27,7 +11,7 @@ resource "aws_instance" "web" {
     volume_size = "10"
   }
 }
-
+# EC2 Security Group
 resource "aws_security_group" "Webserver_security" {
   name = "Security Group1"
 
