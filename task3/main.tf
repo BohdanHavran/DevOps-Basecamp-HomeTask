@@ -4,7 +4,7 @@ provider "aws" {
 # EC2 Instances
 resource "aws_instance" "web" {
   ami                    = "ami-0283a57753b18025b"
-  instance_type          = "t2.micro"
+  instance_type          = "t2.small"
   vpc_security_group_ids = [aws_security_group.Webserver_security.id]
   user_data              = file("user_data.sh")
   root_block_device {
