@@ -52,7 +52,7 @@ resource "aws_security_group" "Webserver_security" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-# EC2 Public IP
+# EC2 Public-IP
 output "ec2_ip" {
   value = aws_instance.web.public_ip
 }
