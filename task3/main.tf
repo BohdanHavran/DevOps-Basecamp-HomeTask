@@ -1,9 +1,18 @@
 provider "aws" {
   region = "us-east-2"
 }
+# EC2 AMI
+data "aws_ami" "ubuntu" {
+  owners      = ["099720109477"]
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+}
 # EC2 Instances
 resource "aws_instance" "web" {
-  ami                    = "ami-0283a57753b18025b"
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.small"
   vpc_security_group_ids = [aws_security_group.Webserver_security.id]
   user_data              = file("user_data.sh")
