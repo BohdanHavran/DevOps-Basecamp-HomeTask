@@ -21,3 +21,7 @@ In order to run this project, you need to enter the following commands:
 
 If you need to remove a project from AWS:
 - terraform destroy
+
+<img width="960" alt="1" src="https://user-images.githubusercontent.com/7732624/208710631-961bd652-afce-4540-b7b9-f098cc0183fd.PNG">
+<img width="960" alt="2" src="https://user-images.githubusercontent.com/7732624/208710684-76468521-bdeb-4355-b53a-4c585cf7d6f6.PNG">
+<img width="960" alt="3" src="https://user-images.githubusercontent.com/7732624/208710939-be8c461c-f385-45e0-990a-21959ea56623.PNG">
