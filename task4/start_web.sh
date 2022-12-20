@@ -21,7 +21,7 @@ sudo sed -i "s/database_name_here/wordpress/g" /var/www/wordpress/wp-config.php
 sudo sed -i "s/username_here/wordpressuser/g" /var/www/wordpress/wp-config.php
 sudo sed -i "s/password_here/password/g" /var/www/wordpress/wp-config.php
 IP=$(hostname -i)
-if ($IP = "10.2.0.3")
+if ($IP == "10.2.0.3")
   {
     sudo sed -i "s/localhost/10.2.0.3:3306/g" /var/www/wordpress/wp-config.php
   }
