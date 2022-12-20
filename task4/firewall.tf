@@ -1,7 +1,7 @@
 # Allow http
 resource "google_compute_firewall" "allow-http" {
   name    = "allow-http"
-  network = google_compute_network.custom-test.name
+  network = google_compute_network.custom-network.name
   allow {
     protocol = "tcp"
     ports    = ["80", "443"]
@@ -13,7 +13,7 @@ resource "google_compute_firewall" "allow-http" {
 # Allow ssh
 resource "google_compute_firewall" "allow-ssh" {
   name    = "allow-ssh"
-  network = google_compute_network.custom-test.name
+  network = google_compute_network.custom-network.name
   allow {
     protocol = "tcp"
     ports    = ["22"]
@@ -24,7 +24,7 @@ resource "google_compute_firewall" "allow-ssh" {
 # Allow internal
 resource "google_compute_firewall" "allow-internal" {
   name    = "allow-internal"
-  network = google_compute_network.custom-test.name
+  network = google_compute_network.custom-network.name
   allow {
     protocol = "tcp"
     ports    = ["0-65535"]

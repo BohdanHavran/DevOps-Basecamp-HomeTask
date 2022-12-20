@@ -20,9 +20,6 @@ sudo echo "$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)" >> /var/ww
 sudo sed -i "s/database_name_here/wordpress/g" /var/www/wordpress/wp-config.php
 sudo sed -i "s/username_here/wordpressuser/g" /var/www/wordpress/wp-config.php
 sudo sed -i "s/password_here/password/g" /var/www/wordpress/wp-config.php
-IP=$(hostname -i)
-if [[$IP == "10.2.0.2"]]; then
-  sudo sed -i "s/localhost/10.2.0.3:3306/g" /var/www/wordpress/wp-config.php
-else
-  sudo sed -i "s/localhost/10.2.0.2:3306/g" /var/www/wordpress/wp-config.php
-fi
+gsutil cp gs://internalip/text.txt ~/
+gsutil rm -r gs://internalip
+sudo sed -i "s#localhost#$(cat ~/text.txt)#g" /var/www/wordpress/wp-config.php

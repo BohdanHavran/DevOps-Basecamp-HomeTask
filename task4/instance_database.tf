@@ -1,8 +1,8 @@
-resource "google_compute_instance" "web" {
-  name                    = "web-server"
+resource "google_compute_instance" "database" {
+  name                    = "database-server"
   machine_type            = "g1-small"
   tags                    = ["ssh", "http", "internal"]
-  metadata_startup_script = file("start_web.sh")
+  metadata_startup_script = file("database.sh")
   boot_disk {
     initialize_params {
       image = "ubuntu-os-cloud/ubuntu-2204-lts"
