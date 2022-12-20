@@ -2,6 +2,11 @@
 resource "google_compute_firewall" "allow-http" {
   name    = "allow-http"
   network = google_compute_network.custom-network.name
+
+  allow {
+    protocol = "icmp"
+  }
+
   allow {
     protocol = "tcp"
     ports    = ["80", "443"]

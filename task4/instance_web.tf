@@ -1,3 +1,4 @@
+# Instance Web
 resource "google_compute_instance" "web" {
   name                    = "web-server"
   machine_type            = "g1-small"

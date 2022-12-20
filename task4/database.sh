@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt-get -y update
-echo "$(hostname -i)" > text.txt
-gsutil cp text.txt gs://internalip
+echo "$(hostname -i)" > internalip.txt
+gsutil cp internalip.txt gs://internalip
 sudo apt -y install mysql-client mysql-server
 sudo mysql -u root -proot << eof
 CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;

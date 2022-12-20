@@ -1,7 +1,8 @@
+# Instance Database
 resource "google_compute_instance" "database" {
   name                    = "database-server"
   machine_type            = "g1-small"
-  tags                    = ["ssh", "http", "internal"]
+  tags                    = ["ssh", "internal"]
   metadata_startup_script = file("database.sh")
   boot_disk {
     initialize_params {

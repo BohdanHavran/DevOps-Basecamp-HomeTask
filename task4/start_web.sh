@@ -20,6 +20,6 @@ sudo echo "$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)" >> /var/ww
 sudo sed -i "s/database_name_here/wordpress/g" /var/www/wordpress/wp-config.php
 sudo sed -i "s/username_here/wordpressuser/g" /var/www/wordpress/wp-config.php
 sudo sed -i "s/password_here/password/g" /var/www/wordpress/wp-config.php
-gsutil cp gs://internalip/text.txt ~/
+gsutil cp gs://internalip/internalip.txt ~/
 gsutil rm -r gs://internalip
-sudo sed -i "s#localhost#$(cat ~/text.txt)#g" /var/www/wordpress/wp-config.php
+sudo sed -i "s#localhost#$(cat ~/internalip.txt)#g" /var/www/wordpress/wp-config.php
