@@ -1,7 +1,7 @@
 # LAMP IN GCP
 URL: http://35.203.149.109
  
-- [provider.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task4/provider.tf) is a file in which you need to describe your creds. <br>
+- [provider.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task4/provider.tf) is a file in which you need to describe your credentials. <br>
 - [instance_web.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task4/instance_web.tf) describes the instructions for creating a virtual machine for running Wordpress. <br>
 - [instance_database.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task4/instance_database.tf) describes the instructions for creating a virtual machine to run the database. <br>
 - [bucket.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task4/bucket.tf) describes the instructions for creating a bucket, which will serve to transfer the private ip address of the database to Wordpress. <br>
