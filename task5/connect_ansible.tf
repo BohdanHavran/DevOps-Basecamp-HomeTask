@@ -6,7 +6,7 @@ resource "null_resource" "ansible" {
       type        = "ssh"
       user        = "ubuntu"
       private_key = tls_private_key.ssh.private_key_pem
-      host        = data.aws_instances.ansible_instances.public_ips[0]
+      hosts       = [data.aws_instances.ansible_instances.public_ips[0], data.aws_instances.ansible_instances.public_ips[1]]
     }
   }
   provisioner "local-exec" {
