@@ -8,5 +8,5 @@ Ubuntu2 ansible_host=${web_public_ip_1}
 Ubuntu3 ansible_host=${web_public_ip_2}
 
 [iaas:children]
-iaa
+iaa1
 iaa2
