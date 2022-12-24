@@ -1,6 +1,6 @@
 ---
 - name: Creating a empty file /etc/iaac with rigths 0500
-  hosts: iaac
+  hosts: iaas
   become: yes
 
   roles:

@@ -11,7 +11,7 @@ resource "local_file" "ssh_cfg" {
       ssh = "/home/${var.ssh_username}/.ssh/devops.pem"
     }
   )
-  filename = "ansible/group_vars/iaa"
+  filename = "ansible/group_vars/iaa1"
 }
 resource "local_file" "ssh2_cfg" {
   content = templatefile("${path.module}/tpl/iaa.tpl",
