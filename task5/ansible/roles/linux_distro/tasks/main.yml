@@ -1,0 +1,6 @@
+---
+- name: Fetch a linux distro name/version
+  debug:
+      msg:
+      - "Hostname : {{ ansible_hostname }}"
+      - "Linux distro name/version: {{ ansible_distribution }}/{{ ansible_distribution_version }}"

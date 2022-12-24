@@ -1,9 +1,14 @@
 ---
-- name: Test
+- name: Creating a empty file /etc/iaac with rigths 0500
+  hosts: iaac
+  become: yes
+
+  roles:
+  - create_iaac
+
+- name: Fetch a linux distro name/version
   hosts: all
   become: yes
 
-  tasks:
-
-  - name: Ping my servers
-    ping:
+  roles:
+  - linux_distro
