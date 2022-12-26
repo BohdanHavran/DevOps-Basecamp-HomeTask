@@ -4,6 +4,7 @@ URL Azure instance: http://104.214.220.220/
 
 <h3>Note</h3>
 
+<b><i><ins>You need to go to [providers.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task6/providers.tf) and write your credentials</ins></b></i><br>
 Using the [main.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task6/main.tf) file, you can configure both an AWS instance and an Azure instance. 
 All you need is to simply go to the file, uncomment the desired value and change it to your own.
 If you don't have [Terraform installed](https://developer.hashicorp.com/terraform/downloads?product_intent=terraform), you should install it
