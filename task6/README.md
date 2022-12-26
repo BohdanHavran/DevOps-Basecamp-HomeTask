@@ -6,7 +6,7 @@ URL Azure instance: http://104.214.220.220/
 
 Using the [main.tf](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task6/main.tf) file, you can configure both an AWS instance and an Azure instance. 
 All you need is to simply go to the file, uncomment the desired value and change it to your own.
-If you don't have [Terraform](https://developer.hashicorp.com/terraform/downloads?product_intent=terraform)
+If you don't have [Terraform installed](https://developer.hashicorp.com/terraform/downloads?product_intent=terraform), you should install it
 
 # How to start?
 
@@ -35,5 +35,7 @@ If you need to remove a project:
 terraform destroy
 ```
 
+# Output public ip
+When you start the project, at the end it will display public IP addresses with which you can connect. It will look like this:
 
 ![image](https://user-images.githubusercontent.com/7732624/209582499-aa2e80d9-7d80-4be6-aa95-b1f191afb03d.png)
