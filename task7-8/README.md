@@ -3,7 +3,7 @@ In this task, I used Ansible to configure the server so that you cannot change t
 
 <h3>Note</h3>
 
-You need to go to group_vars/ and edit the [pam](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task7-8/group_vars/pam) file for yourself (I used password as a server login, you can use ssh key, for this you need to uncomment the necessary thread and delete the unnecessary ones). 
+You need to go to group_vars/ and edit the [pam](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task7-8/group_vars/pam) file for yourself (I used the password to login to the server, you can use ssh key, for this you need to uncomment the necessary line and delete the unnecessary ones). 
 Also you need to edit the [hosts.cfg](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/blob/main/task7-8/hosts.cfg)<br>
 Tested on:
 
