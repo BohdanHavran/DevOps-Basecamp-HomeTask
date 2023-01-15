@@ -1,0 +1,5 @@
+---
+ansible_user : linux_username
+ansible_password : linux_password
+ansible_sudo_pass : linux_password
+# ansible_ssh_private_key_file : ${ssh}

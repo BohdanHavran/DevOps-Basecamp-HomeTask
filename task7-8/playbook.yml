@@ -1,0 +1,7 @@
+---
+- name: Prohibition of users from using their name as a password.
+  hosts: all
+  become: yes
+
+  roles:
+  - pam_module

@@ -1,0 +1,13 @@
+---
+- name: Install pam_cracklib
+  ansible.builtin.apt:
+      name: libpam-cracklib
+      state: present
+      update_cache: yes
+
+- name: Configuration pam_cracklib
+  ansible.builtin.lineinfile:
+      path: /etc/pam.d/common-password
+      state: present
+      regexp: 'pam_cracklib.so'
+      line: 'password        requisite                       pam_cracklib.so try_first_pass retry=3 minlen=8 difok=3 reject_username enforce_for_root'
