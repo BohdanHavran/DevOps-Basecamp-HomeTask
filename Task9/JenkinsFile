@@ -8,7 +8,7 @@ pipeline {
         stage('Initialization Script') {
             steps {
                 sh '''
-                    cd Task9/Project-Script/Install_grafana.sh
+                    cd Task9/Project-Script
                     sudo chmod +x Install_grafana.sh
                 '''
             }
@@ -16,7 +16,7 @@ pipeline {
         stage('Test Script') {
             steps {
                 sh '''
-                    cd Task9/Project-Script/Install_grafana.sh
+                    cd Task9/Project-Script
                     ls -la
                     sudo ./Install_grafana.sh
                 '''
