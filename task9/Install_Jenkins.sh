@@ -1,6 +1,6 @@
 #!/bin/bash
-sudo mkdir $HOME/Jenkins
-cd $HOME/Jenkins
+sudo mkdir ./Jenkins
+cd ./Jenkins
 # -------------
 sudo echo "ant:latest
 antisamy-markup-formatter:latest
@@ -17,7 +17,8 @@ github-branch-source:latest
 gradle:latest
 ldap:latest
 mailer:latest
-matrix-auth:latest
+matrix-auth:latesti
+multibranch-scan-webhook-trigger:latest
 workflow-multibranch:latest
 pam-auth:latest
 pollscm:latest
@@ -50,7 +51,7 @@ security:
         strategy: triggeringUsersAuthorizationStrategy
 unclassified:
   location:
-    url: http://192.168.56.101:8080/" > casc.yaml
+    url: http://hvb-s.tplinkdns.com:8080/" > casc.yaml
 # -------------
 sudo echo "FROM jenkins/jenkins:latest
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
@@ -61,4 +62,4 @@ COPY casc.yaml /var/jenkins_home/casc.yaml" > Dockerfile
 # -------------
 docker build -t jenkins:1.0 .
 # -------------
-docker run --name first-jenkins -d --rm -p 8080:8080 jenkins:1.0
+docker run --name first-jenkins -d -p 8080:8080 jenkins:1.0
