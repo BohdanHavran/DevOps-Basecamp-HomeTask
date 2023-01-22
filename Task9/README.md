@@ -1,7 +1,7 @@
 # HomeTask: Jenkins/-CI pipelines/Groovy
 In this task, I automatically install Jenkins using a bash script and Docker. In this task, Jenkins plays the role of an automated service for the 
 initialization, testing and deployment of the project to the cloud using Terraform.If you don't have [Docker installed](https://docs.docker.com/engine/install/ubuntu/), you should install it<br> Elements that were used in this task:<br>
-[Multibranch Pipeline](Multibranch) | [Credentials](Credentials) | [Telegram Notification](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/new/main/Task9#telegram-notification) | [WebHock](https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask/new/main/Task9#webhock)
+[Multibranch Pipeline](#Multibranch) | [Credentials](#Credentials) | [Telegram Notification](#Telegram) | [WebHock](#WebHock)
 
 # How to start?
 
@@ -37,7 +37,7 @@ sudo ./Install_Jenkins.sh
 ![image](https://user-images.githubusercontent.com/7732624/213934111-a2b80303-5d7a-45c0-9fb7-74f224f70de6.png)
 ![image](https://user-images.githubusercontent.com/7732624/213934135-c38b6d71-00b5-4db1-9347-39173e9469fe.png)
 
-# Telegram Notification
+# <a name="Telegram">Telegram Notification</a>
 ![image](https://user-images.githubusercontent.com/7732624/213931715-274df55e-9d8e-4f0d-a2e3-8233b32bc1c2.png)![image](https://user-images.githubusercontent.com/7732624/213931746-61ca863c-51c3-455a-8e2a-df8efc8e5b5d.png)
 ```
 post {
@@ -59,6 +59,6 @@ post {
 }
 ```
 
-# WebHock
+# <a name="WebHock">WebHock</a>
 ![image](https://user-images.githubusercontent.com/7732624/213931369-4a488b49-133c-496d-a65c-a138f9699614.png)
 
