@@ -1,7 +1,7 @@
 # HomeTask: Jenkins/-CI pipelines/Groovy
 In this task, I automatically install Jenkins using a bash script and Docker. In this task, Jenkins plays the role of an automated service for the 
 initialization, testing and deployment of the project to the cloud using Terraform.If you don't have [Docker installed](https://docs.docker.com/engine/install/ubuntu/), you should install it<br> Elements that were used in this task:<br>
-[Multibranch-Pipeline](#Multibranch-Pipeline) | [Credentials](#Credentials) | [Telegram-Notification](#Telegram-Notification) | [WebHock](#WebHock)
+[Multibranch-Pipeline](#Multibranch-Pipeline) | [Credentials](#Credentials) | [Telegram-Notification](#Telegram-Notification) | [WebHooks](#WebHooks)
 
 # How to start?
 
@@ -59,6 +59,6 @@ post {
 }
 ```
 
-# <a name="WebHock">WebHock</a>
+# <a name="WebHooks">WebHooks</a>
 ![image](https://user-images.githubusercontent.com/7732624/213931369-4a488b49-133c-496d-a65c-a138f9699614.png)
 
