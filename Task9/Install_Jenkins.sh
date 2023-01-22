@@ -51,7 +51,7 @@ security:
         strategy: triggeringUsersAuthorizationStrategy
 unclassified:
   location:
-    url: http://hvb-s.tplinkdns.com:8080/" > casc.yaml
+    url: http://server_ip:8080/" > casc.yaml
 # -------------
 sudo echo "FROM jenkins/jenkins:latest
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
