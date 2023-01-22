@@ -56,19 +56,6 @@ pipeline {
                 '''
             }
         }
-        stage('Terraform destroy') {
-            when {
-                anyOf {
-                    branch "main"
-                }
-            }
-            steps {
-                sh '''
-                    cd Task9/Terraform
-                    terraform destroy --auto-approve
-                '''
-            }
-        }
     }
     post {
          success { 
