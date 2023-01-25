@@ -1,8 +1,8 @@
 # HomeTask: Docker
 I use Docker for these tasks. In the first task for creating a website. In the second task to create two containers based on ubuntu, the first will have access to both the private and public network, and the second only to the private network. If you don't have [Docker installed](https://docs.docker.com/engine/install/ubuntu/), you should install it. Elements that were used in this task:<br>
-[Task1: How to start?](#Task1) | [Task2: How to start?](#Task2)
+[Task1: How to start?](#task1-how-to-start) | [Task2: How to start?](#task2-how-to-start)
 
-# <a name="Task1">Task1: How to start?</a>
+# <a name="task1-how-to-start">Task1: How to start?</a>
 
 In order to start working with the project, you need:
 ```
@@ -30,7 +30,7 @@ docker ps
 
 ![image](https://user-images.githubusercontent.com/7732624/214635178-f4c5ba40-1b1c-4f27-bf6f-2ac04c8f5fc3.png)
 
-# <a name="Task2">Task2: How to start?</a>
+# <a name="task2-how-to-start">Task2: How to start?</a>
 
 In order to start working with the project, you need:
 ```
@@ -61,6 +61,7 @@ docker network connect private ubuntu-public
 docker run --name ubuntu-private -d --network private ubuntu-ping:1.0
 ```
 ![image](https://user-images.githubusercontent.com/7732624/214640330-69e8dce4-6c5a-4abb-b6df-63702a28e9df.png)
+
 Now you can check if your containers are running:
 ```
 docker ps
