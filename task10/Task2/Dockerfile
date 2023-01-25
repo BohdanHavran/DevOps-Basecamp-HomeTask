@@ -3,6 +3,8 @@ FROM ubuntu:22.04
 RUN apt update && \
     apt install -y inetutils-ping
 
-ENTRYPOINT ["sleep"]
+ARG time=600
+ENV time=$time
 
-CMD ["600"] 
+ENTRYPOINT ["sleep"]
+CMD ["$time"] 
