@@ -1,11 +1,10 @@
 FROM nginx
 
 ARG port=80
-ARG time=600
+ARG time=30
 ENV port=$port
-ENV time=$time
+ENV envtime=$time
 COPY index.html /usr/share/nginx/html/
 EXPOSE $port
 
-ENTRYPOINT ["sleep"]
-CMD ["$time"] 
+CMD ["sh", "-c", "sleep ${envtime}"] 

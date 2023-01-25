@@ -4,7 +4,6 @@ RUN apt update && \
     apt install -y inetutils-ping
 
 ARG time=600
-ENV time=$time
+ENV envtime=$time
 
-ENTRYPOINT ["sleep"]
-CMD ["$time"] 
+CMD ["sh", "-c", "sleep ${envtime}"]
