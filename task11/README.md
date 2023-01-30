@@ -1,4 +1,7 @@
 # Task: Setup Kubernetes
+In this task, we needed to install Kubernetes on two servers to create kubemaster and kubenode.  I used Google Cloud Platform (GSP) to accomplish this task
+
+# How to start? 
 Prepare 2 VMs (kubemaster and kubenode) with the same parametrs
 
 Requirements:
