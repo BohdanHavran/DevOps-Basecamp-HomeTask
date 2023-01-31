@@ -60,5 +60,5 @@ post {
 ```
 
 # <a name="WebHooks">WebHooks</a>
-![image](https://user-images.githubusercontent.com/7732624/215789209-36fd77da-97e6-4f4e-b9ec-63490e1e4290.png)
+![image](https://user-images.githubusercontent.com/7732624/215789966-db1dc521-e83a-4bbe-aa5c-7f9a4ea89044.png)
 
