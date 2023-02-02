@@ -167,6 +167,15 @@ kubectl get nodes
 ![image](https://user-images.githubusercontent.com/7732624/215360636-5dddc38c-d933-4d79-9205-ae3dc1d64478.png)
 
 <i><b>Command only for kubenode</b></i> :
+Connect kubenode to kubemaster:
+```
+sudo su
+```
+```
+kubeadm join 10.132.0.9:6443 --token ut36yh.qd0aeqwaciay05l6         --discovery-token-ca-cert-hash sha256:11111111111111111111111111111111111111111111111111111111111111
+```
+
+<i><b>Comeback to kubemaster</b></i> :
 
 Install network:
 ```
