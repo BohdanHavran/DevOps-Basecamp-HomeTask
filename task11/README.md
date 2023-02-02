@@ -167,6 +167,7 @@ kubectl get nodes
 ![image](https://user-images.githubusercontent.com/7732624/215360636-5dddc38c-d933-4d79-9205-ae3dc1d64478.png)
 
 <i><b>Command only for kubenode</b></i> :
+
 Connect kubenode to kubemaster:
 ```
 sudo su
