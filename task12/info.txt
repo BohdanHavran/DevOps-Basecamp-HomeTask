@@ -19,15 +19,15 @@ Unschedulable:      false
 Lease:
   HolderIdentity:  kubemaster
   AcquireTime:     <unset>
-  RenewTime:       Fri, 03 Feb 2023 23:28:22 +0000
+  RenewTime:       Sat, 04 Feb 2023 01:52:28 +0000
 Conditions:
   Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
   ----                 ------  -----------------                 ------------------                ------                       -------
   NetworkUnavailable   False   Fri, 03 Feb 2023 21:48:42 +0000   Fri, 03 Feb 2023 21:48:42 +0000   CalicoIsUp                   Calico is running on this node
-  MemoryPressure       False   Fri, 03 Feb 2023 23:25:46 +0000   Thu, 02 Feb 2023 20:53:38 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
-  DiskPressure         False   Fri, 03 Feb 2023 23:25:46 +0000   Thu, 02 Feb 2023 20:53:38 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
-  PIDPressure          False   Fri, 03 Feb 2023 23:25:46 +0000   Thu, 02 Feb 2023 20:53:38 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
-  Ready                True    Fri, 03 Feb 2023 23:25:46 +0000   Thu, 02 Feb 2023 21:02:14 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+  MemoryPressure       False   Sat, 04 Feb 2023 01:48:35 +0000   Thu, 02 Feb 2023 20:53:38 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sat, 04 Feb 2023 01:48:35 +0000   Thu, 02 Feb 2023 20:53:38 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sat, 04 Feb 2023 01:48:35 +0000   Thu, 02 Feb 2023 20:53:38 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sat, 04 Feb 2023 01:48:35 +0000   Thu, 02 Feb 2023 21:02:14 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
 Addresses:
   InternalIP:  10.138.0.3
   Hostname:    kubemaster
@@ -61,18 +61,18 @@ PodCIDRs:                     192.168.0.0/24
 Non-terminated Pods:          (12 in total)
   Namespace                   Name                                        CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
   ---------                   ----                                        ------------  ----------  ---------------  -------------  ---
-  calico-apiserver            calico-apiserver-859cc79bc6-m7jmd           0 (0%)        0 (0%)      0 (0%)           0 (0%)         99m
-  calico-apiserver            calico-apiserver-859cc79bc6-w768n           0 (0%)        0 (0%)      0 (0%)           0 (0%)         99m
-  calico-system               calico-kube-controllers-6b7b9c649d-lx5c6    0 (0%)        0 (0%)      0 (0%)           0 (0%)         99m
-  calico-system               calico-node-4f9nt                           0 (0%)        0 (0%)      0 (0%)           0 (0%)         99m
-  calico-system               csi-node-driver-mw4ww                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         99m
-  kube-system                 coredns-787d4945fb-qqfws                    100m (2%)     0 (0%)      70Mi (0%)        170Mi (2%)     26h
-  kube-system                 coredns-787d4945fb-t4sc4                    100m (2%)     0 (0%)      70Mi (0%)        170Mi (2%)     26h
-  kube-system                 etcd-kubemaster                             100m (2%)     0 (0%)      100Mi (1%)       0 (0%)         26h
-  kube-system                 kube-apiserver-kubemaster                   250m (6%)     0 (0%)      0 (0%)           0 (0%)         26h
-  kube-system                 kube-controller-manager-kubemaster          200m (5%)     0 (0%)      0 (0%)           0 (0%)         26h
-  kube-system                 kube-proxy-495gw                            0 (0%)        0 (0%)      0 (0%)           0 (0%)         26h
-  kube-system                 kube-scheduler-kubemaster                   100m (2%)     0 (0%)      0 (0%)           0 (0%)         26h
+  calico-apiserver            calico-apiserver-859cc79bc6-m7jmd           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h4m
+  calico-apiserver            calico-apiserver-859cc79bc6-w768n           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h4m
+  calico-system               calico-kube-controllers-6b7b9c649d-lx5c6    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h4m
+  calico-system               calico-node-4f9nt                           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h4m
+  calico-system               csi-node-driver-mw4ww                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h4m
+  kube-system                 coredns-787d4945fb-qqfws                    100m (2%)     0 (0%)      70Mi (0%)        170Mi (2%)     28h
+  kube-system                 coredns-787d4945fb-t4sc4                    100m (2%)     0 (0%)      70Mi (0%)        170Mi (2%)     28h
+  kube-system                 etcd-kubemaster                             100m (2%)     0 (0%)      100Mi (1%)       0 (0%)         28h
+  kube-system                 kube-apiserver-kubemaster                   250m (6%)     0 (0%)      0 (0%)           0 (0%)         28h
+  kube-system                 kube-controller-manager-kubemaster          200m (5%)     0 (0%)      0 (0%)           0 (0%)         28h
+  kube-system                 kube-proxy-495gw                            0 (0%)        0 (0%)      0 (0%)           0 (0%)         28h
+  kube-system                 kube-scheduler-kubemaster                   100m (2%)     0 (0%)      0 (0%)           0 (0%)         28h
 Allocated resources:
   (Total limits may be over 100 percent, i.e., overcommitted.)
   Resource           Requests    Limits
