@@ -1,6 +1,6 @@
 # Home Task k8s part 2
 In this task, I used Kubespray, which I used to install Kubernetes. To execute it you need an instance, also in this task we will use ingress and receive a certificate. Elements that were used in this task:<br>
-[Сreate instance](#create-instance) | [Git clone](#git-clone) | [Install Ingress-controller](#install-ingress-controller) | [Create domain name](#create-domain-name) | [Deployment and Ingress](#deployment-and-ingress) | [Certificate](#certificate) | [Result](#result)
+[Сreate instance](#create-instance) | [Setup Kubernetes with Kubespray](#setup-kubernetes-with-kubespray) | [Git clone](#git-clone) | [Install Ingress-controller](#install-ingress-controller) | [Create domain name](#create-domain-name) | [Deployment and Ingress](#deployment-and-ingress) | [Certificate](#certificate) | [Result](#result)
 
 # How to start?
 First you need to create an instance on which you will install kubernetes using kubespray (if you already have it ready, you can skip to the next steps):
@@ -17,7 +17,7 @@ Add your SSH public key:<br>
 Test SSH connection from local machine:<br>
 ![image](https://user-images.githubusercontent.com/7732624/217244171-81ecec7c-ea63-4267-832d-6d884299adc0.png)
 
-### Setup Kubernetes with Kubespray
+### <a name="setup-kubernetes-with-kubespray">Setup Kubernetes with Kubespray</a>
 <b>All commands are executed on the local machine</b>
 
 Clone Kubespray release  repository:
