@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    #cert-manager.io/issuer: "letsencrypt-staging"
+
+spec:
+  #tls:
+  #- hosts:
+  # - your_domain_name
+  # secretName: quickstart-nginx-tls
+  rules:
+  - host: your_domain_name
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80
