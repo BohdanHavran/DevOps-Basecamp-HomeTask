@@ -3,4 +3,4 @@ container:
 
 replicaCount: 3
 
-host: bohdanhavran.dynv6.net
+host: your_domain_name

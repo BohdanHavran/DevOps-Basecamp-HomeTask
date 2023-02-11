@@ -1,6 +1,6 @@
 apiVersion: v2
-name       : pacman-chart
-description: My Helm chart for Kubernetes
+name       : Pacman
+description: My Pacman for Kubernetes
 type       : application
 version    : 0.1.0
 appVersion : "1.0.0"

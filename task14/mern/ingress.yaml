@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mern
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    cert-manager.io/issuer: "letsencrypt-prod"
+
+spec:
+  tls:
+  - hosts:
+    - your_domain_name
+    secretName: quickstart-nginx-tls
+  rules:
+  - host: your_domain_name
+    http:
+      paths:
+      - path: /mern
+        pathType: Prefix
+        backend:
+          service:
+            name: mern-stack-node
+            port:
+              number: 80
