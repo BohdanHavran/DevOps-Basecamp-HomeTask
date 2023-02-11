@@ -1,0 +1,6 @@
+container:
+  image: nginx:latest
+
+replicaCount: 3
+
+host: bohdanhavran.dynv6.net
