@@ -16,7 +16,7 @@ spec:
   - host: {{ .Values.host }}
     http:
       paths:
-      - path: /nginx-chart
+      - path: /{{ .Release.Name }}
         pathType: Prefix
         backend:
           service:
