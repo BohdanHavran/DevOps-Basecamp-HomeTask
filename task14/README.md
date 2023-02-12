@@ -78,11 +78,10 @@ kubectl get all
 ![image](https://user-images.githubusercontent.com/7732624/218249585-e0797b2e-db49-46d4-89d3-f2bdf7f43dc0.png)
 
 <b>Result:</b><br>
-URL: https://bohdanhavran.dynv6.net/pacman
+URL: https://bohdanhavran.dynv6.net/
 
 <b>Note:</b>
 - host can be changed in the values.yaml file or when starting helm chart change its value using --set host=<your_domain_name>
-- /pach depends on the name releases
 
 ![image](https://user-images.githubusercontent.com/7732624/218249599-aef80936-e25b-4d13-a7af-683a566179b6.png)
 
