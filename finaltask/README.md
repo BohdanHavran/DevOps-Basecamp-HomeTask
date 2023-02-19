@@ -1,11 +1,15 @@
 # <a name="finaltask">FinalTask</a>
 In this task, I used Terraform to deploy the infrastructure and Ansible to configure it, and Kubernetes was also involved. Using Terraform I created an inventory file, group_vars and some more config files, these files are used to connect Ansible to remote virtual machines. After Terraform deploys the infrastructure, it runs Ansible, which already configures the server. For correct operation when starting Terraform, enter your Linux username in the ssh_username variable and enter your domain name in the host variable, if you don't have one, you can use the free [dynv6](https://dynv6.com/) service to create it. The instructions are described below. If you don't have [Terraform](https://developer.hashicorp.com/terraform/downloads?product_intent=terraform), [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html), or [Docker](https://docs.docker.com/engine/install/ubuntu/) installed, you need to install!
 Elements that were used in this task:<br>
-[Hardening](#hardening) | [Deploy K8s](#deploy-k8s) | [Deploy Wordpress](#deploy-wordpress) | [Result](#result)
+[Infrastructure in GCP](#infrastructure-in-gcp) | [Hardening](#hardening) | [Deploy K8s](#deploy-k8s) | [Deploy Wordpress](#deploy-wordpress) | [Result](#result)
 
 <h3>Note</h3>
-Tested on:
+Before starting work with the project, you should check whether you have enabled such resources as sqladmin API, Cloud Resource Manager API and Service Networking API, if not, then you need to go to the GCP site and enable them there.
+Before starting work with the project, you should check whether you have enabled such resources as sqladmin API, Cloud Resource Manager API and Service Networking API, if not, then you need to go to the GCP site and enable them there.<br>
+<br>
+<b>The project will be ready in +-40 minutes</b><br><br>
 
+Tested on:
 - Ubuntu 20.04 LTS
 - Terraform v1.3.6
 - Ansible Version: 6.7.0
@@ -26,9 +30,15 @@ terraform init
 terraform apply -var ssh_username="Your linux username" -var host="Your domain name" --auto-approve
 ```
 Now you just have to wait for all the processes to complete
+### <a name="infrastructure-in-gcp">Infrastructure in GCP</a> [☝️](#finaltask)
+The first thing Terraform does is create a VPC, Instance and managed DB (MySQL):<br>
+![image](https://user-images.githubusercontent.com/7732624/219962170-c1a571cd-082c-4952-bdbf-fc69b2b12540.png)<br>
+![image](https://user-images.githubusercontent.com/7732624/219962112-0ce1053b-97ba-4c9d-947e-f6bd69e3b158.png)<br>
+![image](https://user-images.githubusercontent.com/7732624/219962139-6adb0100-9329-4ed1-b4e2-69f471f2ee27.png)
+
 
 ### <a name="hardening">Hardening</a> [☝️](#finaltask)
-First of all, server hardening is performed, after its completion, we will receive a result and terraform will proceed to the following process:
+After the infrastructure is created, first of all, server hardening is performed, after its completion, we will get the result and terraform will proceed to the next process:
 
 ![image](https://user-images.githubusercontent.com/7732624/219907025-1451b639-1235-4254-8859-18c2dc9c0937.png)
 
