@@ -26,13 +26,18 @@
       dest: wp-config.php
       backup: yes
 
+- name: Verify Permissions on wp-config
+  ansible.builtin.file:
+    path: wp-config.php
+    mode: '0777'
+
 - name: Copy helm chart
   ansible.builtin.copy:
       src: wordpress/
       dest: wordpress/
       backup: yes
 
-- name: Verify Permissions on .kube/config
+- name: Verify Permissions on wordpress/
   ansible.builtin.file:
     path: wordpress/
     mode: '0777'
@@ -42,27 +47,3 @@
     name: wordpress
     chart_ref: wordpress/
     release_namespace: default
-
-# - name: kubectl configuration
-#   ansible.builtin.shell: mkdir ~/.kube && sudo cp /etc/kubernetes/admin.conf ~/.kube/config && sudo chmod 777 ~/.kube/config
-#
-# - name: clone repo
-#   ansible.builtin.shell: git clone https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask.git
-#
-# - name: config
-#   ansible.builtin.shell: cd DevOps-Basecamp-HomeTask/task13 && sed -i 's/your_domain_name/bohdanhavran.dns.navy/g' ingress.yaml && sed -i 's/nginx:latest/wordpress/g' deployment.yaml
-#
-# - name: deploy ingress-contoler
-#   ansible.builtin.shell: cd DevOps-Basecamp-HomeTask/task13 && kubectl apply -f nginx-ctl.yaml && kubectl apply -f path_provisioner.yaml
-#
-# - name: kubectl
-#   ansible.builtin.command: kubectl get svc --all-namespaces
-#   register: local
-#
-# - name: kubectl svc
-#   debug:
-#       msg:
-#       - "{{ local }}"
-#
-# - name: deploy wordpress
-#   ansible.builtin.shell: cd DevOps-Basecamp-HomeTask/task13 && sleep 15 && kubectl apply -f deployment.yaml && kubectl apply -f ingress.yaml
