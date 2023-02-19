@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.container.image }}
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: {{ .Release.Name }}
+          mountPath: /var/www/html/wp-config.php
+      volumes:
+        - name: {{ .Release.Name }}
+          hostPath:
+            path: {{ .Values.config }}
+            type: FileOrCreate

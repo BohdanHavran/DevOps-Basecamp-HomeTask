@@ -1,0 +1,68 @@
+---
+- name: Install helm with option --classic
+  community.general.snap:
+    name: helm
+    classic: true
+
+- name: Creates directory .kube/
+  ansible.builtin.file:
+    path: .kube/
+    state: directory
+
+- name: Copy admin.conf
+  ansible.builtin.copy:
+      remote_src: yes
+      src: /etc/kubernetes/admin.conf
+      dest: .kube/config
+
+- name: Verify Permissions on .kube/config
+  ansible.builtin.file:
+    path: .kube/config
+    mode: '0777'
+
+- name: Copy wp-config
+  ansible.builtin.copy:
+      src: wp-config.php
+      dest: wp-config.php
+      backup: yes
+
+- name: Copy helm chart
+  ansible.builtin.copy:
+      src: wordpress/
+      dest: wordpress/
+      backup: yes
+
+- name: Verify Permissions on .kube/config
+  ansible.builtin.file:
+    path: wordpress/
+    mode: '0777'
+
+- name: Deploy
+  kubernetes.core.helm:
+    name: wordpress
+    chart_ref: wordpress/
+    release_namespace: default
+
+# - name: kubectl configuration
+#   ansible.builtin.shell: mkdir ~/.kube && sudo cp /etc/kubernetes/admin.conf ~/.kube/config && sudo chmod 777 ~/.kube/config
+#
+# - name: clone repo
+#   ansible.builtin.shell: git clone https://github.com/BohdanHavran/DevOps-Basecamp-HomeTask.git
+#
+# - name: config
+#   ansible.builtin.shell: cd DevOps-Basecamp-HomeTask/task13 && sed -i 's/your_domain_name/bohdanhavran.dns.navy/g' ingress.yaml && sed -i 's/nginx:latest/wordpress/g' deployment.yaml
+#
+# - name: deploy ingress-contoler
+#   ansible.builtin.shell: cd DevOps-Basecamp-HomeTask/task13 && kubectl apply -f nginx-ctl.yaml && kubectl apply -f path_provisioner.yaml
+#
+# - name: kubectl
+#   ansible.builtin.command: kubectl get svc --all-namespaces
+#   register: local
+#
+# - name: kubectl svc
+#   debug:
+#       msg:
+#       - "{{ local }}"
+#
+# - name: deploy wordpress
+#   ansible.builtin.shell: cd DevOps-Basecamp-HomeTask/task13 && sleep 15 && kubectl apply -f deployment.yaml && kubectl apply -f ingress.yaml

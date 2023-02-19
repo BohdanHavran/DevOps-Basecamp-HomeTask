@@ -1,0 +1,8 @@
+container:
+  image: wordpress:latest
+
+replicaCount: 1
+
+host: bohdanhavran.dns.navy
+
+config: /home/bohdan/.ssh/id_rsa

@@ -1,0 +1,408 @@
+---
+###################################################################################
+# - name: Install cmake
+#   ansible.builtin.apt:
+#       name: cmake
+#       state: present
+#       update_cache: yes
+#
+# - name: Install make
+#   ansible.builtin.apt:
+#       name: make
+#       state: present
+#       update_cache: yes
+#
+# - name: Install expat
+#   ansible.builtin.apt:
+#       name: expat
+#       state: present
+#       update_cache: yes
+#
+# - name: Install libopenscap8
+#   ansible.builtin.apt:
+#       name: libopenscap8
+#       state: present
+#       update_cache: yes
+#
+# - name: Install libxml2-utils
+#   ansible.builtin.apt:
+#       name: libxml2-utils
+#       state: present
+#       update_cache: yes
+#
+# - name: Install ninja-build
+#   ansible.builtin.apt:
+#       name: ninja-build
+#       state: present
+#       update_cache: yes
+#
+# - name: Install python3-jinja2
+#   ansible.builtin.apt:
+#       name: python3-jinja2
+#       state: present
+#       update_cache: yes
+#
+# - name: Install python3-yaml
+#   ansible.builtin.apt:
+#       name: python3-yaml
+#       state: present
+#       update_cache: yes
+#
+# - name: Install xsltproc
+#   ansible.builtin.apt:
+#       name: xsltproc
+#       state: present
+#       update_cache: yes
+# 
+- name: Install aide
+  ansible.builtin.apt:
+      name: aide
+      state: present
+      update_cache: yes
+
+- name: Install iptables-persistent
+  ansible.builtin.apt:
+      name: iptables-persistent
+      state: present
+      update_cache: yes
+
+- name: Install pwquality
+  ansible.builtin.apt:
+      name: libpam-pwquality
+      state: present
+      update_cache: yes
+
+- name: Install the ntp service
+  ansible.builtin.apt:
+      name: ntp
+      state: present
+      update_cache: yes
+
+- name: Install nftables Package
+  ansible.builtin.apt:
+      name: nftables
+      state: present
+      update_cache: yes
+
+- name: Uninstall rsync Package
+  ansible.builtin.apt:
+      name: rsync
+      state: absent
+
+- name: Remove telnet Clients
+  ansible.builtin.apt:
+      name: telnet
+      state: absent
+###################################################################################
+# - name: Git clone
+#   ansible.builtin.git:
+#     repo: 'https://github.com/ComplianceAsCode/content.git'
+#     dest: content/
+
+###################################################################################
+# - name: build the content for 20.04
+#   ansible.builtin.shell: ./build_product ubuntu2004
+#   args:
+#     chdir: content/
+#
+# - name: cp file
+#   ansible.builtin.shell: cp ssg-ubuntu2004-cpe-*.xml /usr/share/openscap/cpe/
+#   args:
+#     chdir: content/build/
+#
+# - name: cp file
+#   ansible.builtin.shell: cp ssg-ubuntu2004-cpe-dictionary.xml /usr/share/openscap/cpe/openscap-cpe-dict.xml
+#   args:
+#     chdir: content/build/
+
+###################################################################################
+- name: Configuration common-password
+  ansible.builtin.copy:
+      src: common-password
+      dest: /etc/pam.d/common-password
+      backup: yes
+
+- name: Configuration sshd_config
+  ansible.builtin.copy:
+      src: sshd_config
+      dest: /etc/ssh/sshd_config
+      backup: yes
+
+- name: Verify Permissions on SSH Server config file
+  ansible.builtin.file:
+    path: /etc/ssh/sshd_config
+    mode: '0600'
+
+- name: Configuration pwquality.conf
+  ansible.builtin.copy:
+      src: pwquality.conf
+      dest: /etc/security/pwquality.conf
+      backup: yes
+
+- name: Configuration journald.conf
+  ansible.builtin.copy:
+      src: journald.conf
+      dest: /etc/systemd/journald.conf
+      backup: yes
+
+- name: ipv6
+  ansible.builtin.shell: sysctl -w net.ipv6.conf.all.accept_ra=0 && sysctl -w net.ipv6.conf.all.accept_redirects=0 && sysctl -w net.ipv6.conf.default.accept_ra=0 && sysctl -w net.ipv6.conf.default.accept_redirects=0
+
+- name: ipv4
+  ansible.builtin.shell: sysctl -w net.ipv4.conf.all.rp_filter=1 && sysctl -w net.ipv4.conf.all.secure_redirects=0 && sysctl -w net.ipv4.conf.default.rp_filter=1 && sysctl -w net.ipv4.conf.default.secure_redirects=0
+
+- name: Configuration sysctl.conf
+  ansible.builtin.copy:
+      src: sysctl.conf
+      dest: /etc/sysctl.conf
+      backup: yes
+
+- name: Configuration tmout.sh
+  ansible.builtin.copy:
+      src: tmout.sh
+      dest: /etc/profile.d/tmout.sh
+      backup: yes
+
+- name: Add a line to a file /etc/pam.d/common-auth
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/common-auth
+    line: auth required pam_tally2.so onerr=fail silent audit deny=5
+    create: yes
+
+- name: Add a line to a file /etc/pam.d/common-account
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/common-account
+    line: account required pam_tally2.so
+    create: yes
+
+- name: Replace a line to a file /etc/default/useradd
+  ansible.builtin.lineinfile:
+    path: /etc/default/useradd
+    state: present
+    regexp: 'INACTIVE'
+    line: INACTIVE=30
+
+- name: Replace a line to a file /etc/login.defs
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: 'PASS_MAX_DAYS'
+    line: PASS_MAX_DAYS 365
+
+- name: Replace a line to a file /etc/login.defs
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: 'PASS_MIN_DAYS'
+    line: PASS_MIN_DAYS 1
+
+- name: Add a line to a file /etc/pam.d/su
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/su
+    line: auth required pam_wheel.so use_uid
+    create: yes
+
+- name: Replace a line to a file /etc/postfix/main.cf
+  ansible.builtin.lineinfile:
+    path: /etc/postfix/main.cf
+    state: present
+    regexp: 'inet_interfaces'
+    line: inet_interfaces = loopback-only
+
+- name: Verify Permissions on cron.d
+  ansible.builtin.file:
+    path: /etc/cron.d
+    mode: '0700'
+
+- name: Verify Permissions on cron.daily
+  ansible.builtin.file:
+    path: /etc/cron.daily
+    mode: '0700'
+
+- name: Verify Permissions on cron.hourly
+  ansible.builtin.file:
+    path: /etc/cron.hourly
+    mode: '0700'
+
+- name: Verify Permissions on cron.monthly
+  ansible.builtin.file:
+    path: /etc/cron.monthly
+    mode: '0700'
+
+- name: Verify Permissions on cron.weekly
+  ansible.builtin.file:
+    path: /etc/cron.weekly
+    mode: '0700'
+
+- name: Verify Permissions on crontab
+  ansible.builtin.file:
+    path: /etc/crontab
+    mode: '0600'
+
+- name: Disable Core Dumps for All Users
+  ansible.builtin.lineinfile:
+    path: /etc/security/limits.conf
+    line: '*     hard   core    0'
+    create: yes
+
+- name: Disable Mounting of cramfs
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/cramfs.conf
+    line: install cramfs /bin/true
+    create: yes
+
+- name: Disable Mounting of freevxfs
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/freevxfs.conf
+    line: install freevxfs /bin/true
+    create: yes
+
+- name: Disable Mounting of hfs
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/hfs.conf
+    line: install hfs /bin/true
+    create: yes
+
+- name: Disable Mounting of hfsplus
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/hfsplus.conf
+    line: install hfsplus /bin/true
+    create: yes
+
+- name: Disable Mounting of jffs2
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/jffs2.conf
+    line: install jffs2 /bin/true
+    create: yes
+
+- name: Disable Mounting of udf
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/udf.conf
+    line: install udf /bin/true
+    create: yes
+
+- name: Disable Modprobe Loading of USB Storage Driver
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/usb-storage.conf
+    line: install usb-storage /bin/true
+    create: yes
+
+- name: Replace a line to a file /etc/login.defs
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: 'UMASK'
+    line: UMASK 027
+
+- name: Ensure the Default Bash Umask is Set Correctly
+  ansible.builtin.lineinfile:
+    path: /etc/bashrc
+    line: umask 027
+    create: yes
+
+- name: Ensure the Default C Shell Umask is Set Correctly
+  ansible.builtin.lineinfile:
+    path: /etc/csh.cshrc
+    line: umask 027
+    create: yes
+
+- name: Ensure the Default Umask is Set Correctly in /etc/profile
+  ansible.builtin.lineinfile:
+    path: /etc/profile
+    line: umask 027
+    create: yes
+
+- name: Ensure Logs Sent To Remote Host
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    line: '*.* @logcollector'
+    create: yes
+
+- name: Ensure Logs Sent To Remote Host
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    line: '*.* @@logcollector'
+    create: yes
+
+- name: Ensure Logs Sent To Remote Host
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    line: '*.* :omrelp:logcollector'
+    create: yes
+
+- name: Enable the NTP Daemon
+  ansible.builtin.shell: systemctl enable ntp.service
+
+- name: Ensure System Log Files Have Correct Permissions
+  ansible.builtin.shell: chmod 640 /var/log/*
+
+- name: Disable Core Dumps for SUID programs
+  ansible.builtin.shell: sysctl -w fs.suid_dumpable=0
+
+- name: Replace a line to a file /etc/postfix/main.cf
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: 'GRUB_CMDLINE_LINUX'
+    line: GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"
+
+- name: Update the grub2 configuration
+  ansible.builtin.shell: update-grub
+
+- name: Ensure permissions on bootloader config are not overridden
+  ansible.builtin.file:
+    path: /usr/sbin/grub-mkconfig
+    mode: '0400'
+
+- name: Make sure group wheel is not in the sudoers configuration
+  ansible.builtin.lineinfile:
+    path: /etc/issue
+    state: absent
+    regexp: ''
+
+- name: Ensure local login warning banner is configured properly
+  ansible.builtin.lineinfile:
+    path: /etc/issue
+    state: present
+    regexp: 'Ubuntu'
+    line: Authorized uses only. All activity may be monitored and reported.
+
+- name: Ensure local login warning banner is configured properly
+  ansible.builtin.lineinfile:
+    path: /etc/issue.net
+    state: present
+    regexp: 'Ubuntu'
+    line: Authorized uses only. All activity may be monitored and reported.
+
+- name: Ensure sudo commands use pty
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: Defaults use_pty
+    create: yes
+
+- name: Ensure sudo log file exists
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: Defaults logfile="/var/log/sudo.log"
+    create: yes
+
+- name: Ensure access to the su command is restricted
+  ansible.builtin.shell: groupadd sugroup
+
+- name: Ensure access to the su command is restricted
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/su
+    state: present
+    regexp: 'pam_wheel.so'
+    line: auth required pam_wheel.so use_uid group=sugroup
+
+- name: Ensure logrotate assigns appropriate permissions
+  ansible.builtin.lineinfile:
+    path: /etc/logrotate.conf
+    state: present
+    regexp: 'create'
+    line: create 0640 root utmp
+
+###################################################################################
+# - name: scan
+#   ansible.builtin.shell: oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_level1_server --report result.html content/build/ssg-ubuntu2004-ds.xml
