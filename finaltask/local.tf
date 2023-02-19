@@ -80,7 +80,7 @@ resource "null_resource" "kubespray" {
     }
   }
   provisioner "local-exec" {
-    command = "sudo docker run --rm -v $(pwd)/kubespray:/mnt/kubespray -v ~/.ssh:/pem quay.io/kubespray/kubespray:v2.20.0 sh -c 'date; cd /mnt/kubespray; ansible-playbook -i inventory/mycluster/inventory.ini --private-key /pem/id_rsa -e ansible_user=${var.ssh_username} -b cluster.yml;'"
+    command = "sudo docker run --rm -v $(pwd)/kubespray:/mnt/kubespray -v /home/${var.ssh_username}/.ssh:/pem quay.io/kubespray/kubespray:v2.20.0 sh -c 'date; cd /mnt/kubespray; ansible-playbook -i inventory/mycluster/inventory.ini --private-key /pem/id_rsa -e ansible_user=${var.ssh_username} -b cluster.yml;'"
   }
   depends_on = [local_file.inventory_tpl, local_file.addons_tpl, local_file.k8s-cluster_tpl]
 }
