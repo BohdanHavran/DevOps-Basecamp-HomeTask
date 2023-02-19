@@ -2,7 +2,7 @@
 resource "google_compute_instance" "k8s" {
   name         = "k8s-server"
   machine_type = "e2-custom-4-8192"
-  tags         = ["ssh", "http", "internal"]
+  tags         = ["ssh", "http"]
   metadata = {
     ssh-keys = "${var.ssh_username}:${file("/home/${var.ssh_username}/.ssh/id_rsa.pub")}"
   }
