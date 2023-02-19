@@ -1,6 +1,6 @@
 provider "google" {
-  credentials = file("autonomous-time-372017-540ae5bc8ab9.json")
-  project     = "autonomous-time-372017"
+  credentials = file("Your credentials")
+  project     = "Your GCP project"
   region      = "us-west1"
   zone        = "us-west1-b"
 }
