@@ -23,4 +23,28 @@ terraform init
 ```
 terraform apply -var ssh_username="Your linux username" -var host="Your domain name" --auto-approve
 ```
+### Hardening
+![image](https://user-images.githubusercontent.com/7732624/219907025-1451b639-1235-4254-8859-18c2dc9c0937.png)
+
+![image](https://user-images.githubusercontent.com/7732624/219907509-c296e77c-0847-4e91-b87c-3e5c0b3a9d2e.png)
+
+
+### Deploy K8s
+![image](https://user-images.githubusercontent.com/7732624/219907099-bf6675c3-2a14-4694-bdf5-687de5c9a455.png)
+
+### Deploy Wordpress
+![image](https://user-images.githubusercontent.com/7732624/219907125-9a7860c3-4593-45f7-982f-11b7bdf5b0ca.png)
+
+### Result
+![image](https://user-images.githubusercontent.com/7732624/219907142-5fa238c9-6429-47de-ba45-66c43f2e8b31.png)
+
+![image](https://user-images.githubusercontent.com/7732624/219907227-f66d5a1f-57bf-4b54-9d3e-04b584e32d00.png)
+
+![image](https://user-images.githubusercontent.com/7732624/219907239-4afa107c-9425-45ec-bda0-c82b13326960.png)
+
+![image](https://user-images.githubusercontent.com/7732624/219907291-96d672df-e4aa-4ef3-b128-fa786d8ddff9.png)
+
+![image](https://user-images.githubusercontent.com/7732624/219907311-7930d5e9-a95b-40ba-bc9f-2803bd00f765.png)
+
+![image](https://user-images.githubusercontent.com/7732624/219907330-6ed18be4-1ea5-4787-bf1e-54d0b5aa2a08.png)
 
