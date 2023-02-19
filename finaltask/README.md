@@ -55,6 +55,7 @@ Now you should add the server's public ip address to your domain name:<br>
 ![image](https://user-images.githubusercontent.com/7732624/219907227-f66d5a1f-57bf-4b54-9d3e-04b584e32d00.png)
 
 Now you can go to your domain name and you will get to wordpress where you should choose the language and you will be transferred to create an admin account, you skip the process of joining the database as this process is automated:<br>
+URL: http://bohdanhavran.dns.navy/ <br>
 ![image](https://user-images.githubusercontent.com/7732624/219907239-4afa107c-9425-45ec-bda0-c82b13326960.png)
 
 ![image](https://user-images.githubusercontent.com/7732624/219907291-96d672df-e4aa-4ef3-b128-fa786d8ddff9.png)
