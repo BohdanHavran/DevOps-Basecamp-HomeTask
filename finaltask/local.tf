@@ -24,7 +24,7 @@ resource "null_resource" "hardening" {
     connection {
       type        = "ssh"
       user        = var.ssh_username
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("/home/${var.ssh_username}/.ssh/id_rsa")
       host        = google_compute_instance.k8s.network_interface[0].access_config[0].nat_ip
     }
   }
@@ -75,7 +75,7 @@ resource "null_resource" "kubespray" {
     connection {
       type        = "ssh"
       user        = var.ssh_username
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("/home/${var.ssh_username}/.ssh/id_rsa")
       host        = google_compute_instance.k8s.network_interface[0].access_config[0].nat_ip
     }
   }
@@ -116,7 +116,7 @@ resource "null_resource" "deploy" {
     connection {
       type        = "ssh"
       user        = var.ssh_username
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("/home/${var.ssh_username}/.ssh/id_rsa")
       host        = google_compute_instance.k8s.network_interface[0].access_config[0].nat_ip
     }
   }
