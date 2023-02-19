@@ -26,21 +26,3 @@ resource "google_compute_firewall" "allow-ssh" {
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["ssh"]
 }
-# Allow internal
-resource "google_compute_firewall" "allow-internal" {
-  name    = "allow-internal"
-  network = google_compute_network.custom-network.name
-  allow {
-    protocol = "tcp"
-    ports    = ["0-65535"]
-  }
-  allow {
-    protocol = "udp"
-    ports    = ["0-65535"]
-  }
-  allow {
-    protocol = "icmp"
-  }
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["internal"]
-}
