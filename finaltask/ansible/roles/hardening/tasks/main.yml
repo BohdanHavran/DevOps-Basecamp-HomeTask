@@ -1,59 +1,5 @@
 ---
 ###################################################################################
-# - name: Install cmake
-#   ansible.builtin.apt:
-#       name: cmake
-#       state: present
-#       update_cache: yes
-#
-# - name: Install make
-#   ansible.builtin.apt:
-#       name: make
-#       state: present
-#       update_cache: yes
-#
-# - name: Install expat
-#   ansible.builtin.apt:
-#       name: expat
-#       state: present
-#       update_cache: yes
-#
-# - name: Install libopenscap8
-#   ansible.builtin.apt:
-#       name: libopenscap8
-#       state: present
-#       update_cache: yes
-#
-# - name: Install libxml2-utils
-#   ansible.builtin.apt:
-#       name: libxml2-utils
-#       state: present
-#       update_cache: yes
-#
-# - name: Install ninja-build
-#   ansible.builtin.apt:
-#       name: ninja-build
-#       state: present
-#       update_cache: yes
-#
-# - name: Install python3-jinja2
-#   ansible.builtin.apt:
-#       name: python3-jinja2
-#       state: present
-#       update_cache: yes
-#
-# - name: Install python3-yaml
-#   ansible.builtin.apt:
-#       name: python3-yaml
-#       state: present
-#       update_cache: yes
-#
-# - name: Install xsltproc
-#   ansible.builtin.apt:
-#       name: xsltproc
-#       state: present
-#       update_cache: yes
-# 
 - name: Install aide
   ansible.builtin.apt:
       name: aide
@@ -93,27 +39,6 @@
   ansible.builtin.apt:
       name: telnet
       state: absent
-###################################################################################
-# - name: Git clone
-#   ansible.builtin.git:
-#     repo: 'https://github.com/ComplianceAsCode/content.git'
-#     dest: content/
-
-###################################################################################
-# - name: build the content for 20.04
-#   ansible.builtin.shell: ./build_product ubuntu2004
-#   args:
-#     chdir: content/
-#
-# - name: cp file
-#   ansible.builtin.shell: cp ssg-ubuntu2004-cpe-*.xml /usr/share/openscap/cpe/
-#   args:
-#     chdir: content/build/
-#
-# - name: cp file
-#   ansible.builtin.shell: cp ssg-ubuntu2004-cpe-dictionary.xml /usr/share/openscap/cpe/openscap-cpe-dict.xml
-#   args:
-#     chdir: content/build/
 
 ###################################################################################
 - name: Configuration common-password
@@ -402,7 +327,3 @@
     state: present
     regexp: 'create'
     line: create 0640 root utmp
-
-###################################################################################
-# - name: scan
-#   ansible.builtin.shell: oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_level1_server --report result.html content/build/ssg-ubuntu2004-ds.xml
