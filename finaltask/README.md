@@ -29,7 +29,7 @@ terraform init
 ```
 terraform apply -var ssh_username="Your linux username" -var host="Your domain name" --auto-approve
 ```
-Now you just have to wait for all the processes to complete
+<b>Now you just have to wait for all the processes to complete</b>
 ### <a name="infrastructure-in-gcp">Infrastructure in GCP</a> [☝️](#finaltask)
 The first thing Terraform does is create a VPC, Instance and managed DB (MySQL):<br>
 ![image](https://user-images.githubusercontent.com/7732624/219962170-c1a571cd-082c-4952-bdbf-fc69b2b12540.png)<br>
@@ -42,7 +42,7 @@ After the infrastructure is created, first of all, server hardening is performed
 
 ![image](https://user-images.githubusercontent.com/7732624/219907025-1451b639-1235-4254-8859-18c2dc9c0937.png)
 
-We can check your server using CIS-CAT, the result should be at least 80 score (I recommend running the check after deploying Kubernetes as it makes its own changes):
+You can check your server using CIS-CAT, the result should be at least 80 score (I recommend running the check after deploying Kubernetes as it makes its own changes):
 
 ![image](https://user-images.githubusercontent.com/7732624/219907509-c296e77c-0847-4e91-b87c-3e5c0b3a9d2e.png)
 
